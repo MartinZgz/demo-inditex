@@ -1,11 +1,12 @@
 package com.inditex.demo.adapter.in.web;
 
+import com.inditex.demo.application.port.in.GetPriceRequest;
+import com.inditex.demo.application.port.in.GetPriceUseCase;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -19,11 +20,8 @@ public class PriceControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @MockitoBean
     private GetPriceUseCase getPriceUseCase;
-
-    @InjectMocks
-    private PriceController priceController;
 
     private static final String START_DATE = "2020-06-14-10:00:00";
     private static final String PRODUCT_ID = "35455";
@@ -39,7 +37,7 @@ public class PriceControllerTests {
                 .andExpect(status().isOk());
 
         then(getPriceUseCase).should()
-                .getPrice(eq(new GetPriceCommand(
+                .getPrice(eq(new GetPriceRequest(
                         START_DATE,
                         Integer.parseInt(PRODUCT_ID),
                         Integer.parseInt(BRAND_ID))));
