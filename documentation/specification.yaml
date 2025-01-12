@@ -53,7 +53,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PriceResponse'
               examples:
-                example1:
+                priceResponse:
                   summary: Example response for June 14, 2020 at 10:00 AM
                   value:
                     productId: 35455
