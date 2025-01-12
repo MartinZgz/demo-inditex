@@ -38,13 +38,13 @@ public class PriceIntegrationTest {
     }
 
     @Test
-    public void givenProduct35455AndBrand1_whenRequestingPriceAt9pmOnJune14_thenPriceShouldBe25_45() throws Exception {
+    public void givenProduct35455AndBrand1_whenRequestingPriceAt9pmOnJune14_thenPriceShouldBe35_50() throws Exception {
         mockMvc.perform(get("/prices")
                         .param("startDate", "2020-06-14-21.00.00")
                         .param("productId", "35455")
                         .param("brandId", "1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.price").value(25.45));
+                .andExpect(jsonPath("$.price").value(35.50));
     }
 
     @Test
