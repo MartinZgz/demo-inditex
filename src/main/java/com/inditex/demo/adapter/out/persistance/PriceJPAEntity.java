@@ -1,18 +1,12 @@
 package com.inditex.demo.adapter.out.persistance;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PRICES")
-@Getter
-@Setter
-@ToString
 public class PriceJPAEntity implements Serializable {
 
     @EmbeddedId
@@ -36,4 +30,60 @@ public class PriceJPAEntity implements Serializable {
 
     @Column(name = "CURR", nullable = false, length = 3)
     private String currency;
+
+    public PriceId getId() {
+        return id;
+    }
+
+    public void setId(PriceId id) {
+        this.id = id;
+    }
+
+    public BrandJPAEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandJPAEntity brand) {
+        this.brand = brand;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 }

@@ -1,16 +1,12 @@
 package com.inditex.demo.adapter.out.persistance;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "BRAND")
-@Getter
-@Setter
 public class BrandJPAEntity implements Serializable {
 
     @Id
@@ -23,4 +19,28 @@ public class BrandJPAEntity implements Serializable {
 
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PriceJPAEntity> prices;
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<PriceJPAEntity> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<PriceJPAEntity> prices) {
+        this.prices = prices;
+    }
 }
