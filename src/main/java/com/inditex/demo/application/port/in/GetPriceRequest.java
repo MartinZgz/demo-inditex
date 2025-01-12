@@ -8,12 +8,12 @@ import static com.inditex.demo.common.validation.Validation.validate;
 
 public record GetPriceRequest(
         @NotNull @NotBlank String startDate,
-        @Min(1) int productId,
+        @Min(1) long productId,
         @Min(1) int brandId
 ) {
     public GetPriceRequest(
             String startDate,
-            int productId,
+            long productId,
             int brandId) {
         this.startDate = startDate;
         this.productId = productId;

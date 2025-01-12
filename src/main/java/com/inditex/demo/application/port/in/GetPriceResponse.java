@@ -1,23 +1,24 @@
 package com.inditex.demo.application.port.in;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import static com.inditex.demo.common.validation.Validation.validate;
+import java.math.BigDecimal;
 
 public record GetPriceResponse(
-        @NotNull @NotBlank String startDate,
-        @Min(1) int productId,
-        @Min(1) int brandId
+        String startDate,
+        String endDate,
+        long productId,
+        int brandId,
+        BigDecimal price,
+        String currency,
+        int priceList
+
 ) {
-    public GetPriceResponse(
-            String startDate,
-            int productId,
-            int brandId) {
+    public GetPriceResponse(String startDate, String endDate, long productId, int brandId, BigDecimal price, String currency, int priceList) {
         this.startDate = startDate;
+        this.endDate = endDate;
         this.productId = productId;
         this.brandId = brandId;
-        validate(this);
+        this.price = price;
+        this.currency = currency;
+        this.priceList = priceList;
     }
 }

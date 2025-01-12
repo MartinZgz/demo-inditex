@@ -1,8 +1,8 @@
 package com.inditex.demo.application.domain.port.in;
 
 import com.inditex.demo.application.port.in.GetPriceRequest;
-import org.junit.jupiter.api.Test;
 import jakarta.validation.ConstraintViolationException;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
