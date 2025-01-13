@@ -66,5 +66,32 @@ public class PriceIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(38.95));
     }
+
+    @Test
+    public void givenUnknownProduct_whenRequestingPrice_thenNotFoundErrorShouldBeThrown() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("startDate", "2020-06-16-21.00.00")
+                        .param("productId", "9999")
+                        .param("brandId", "1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void givenInvalidRequest_whenRequestingPrice_thenBadRequestErrorShouldBeThrown() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("startDate", "2020-06-16-21.00.00")
+                        .param("productId", "0")
+                        .param("brandId", "0"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void givenUnknownBrandId_whenRequestingPrice_thenBadRequestErrorShouldBeThrown() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("startDate", "2020-06-16-21.00.00")
+                        .param("productId", "35455")
+                        .param("brandId", "4"))
+                .andExpect(status().isBadRequest());
+    }
 }
 
