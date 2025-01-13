@@ -56,7 +56,7 @@ To get a local copy up and running follow these simple example steps.
 2. Install latest version of Maven
 3. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/MartinZgz/demo-inditex.git
    ```
 4. Run the application
    ```sh
