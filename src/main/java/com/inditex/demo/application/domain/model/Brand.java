@@ -1,5 +1,7 @@
 package com.inditex.demo.application.domain.model;
 
+import com.inditex.demo.application.domain.exceptions.BrandNotFoundException;
+
 public enum Brand {
     ZARA(1);
 
@@ -13,12 +15,12 @@ public enum Brand {
         return brandId;
     }
 
-    public static Brand fromBrandId(int brandId) {
+    public static Brand fromBrandId(int brandId) throws BrandNotFoundException {
         for (Brand brand : Brand.values()) {
             if (brand.getBrandId() == brandId) {
                 return brand;
             }
         }
-        throw new IllegalArgumentException("No Brand found with brandId " + brandId);
+        throw new BrandNotFoundException("No Brand found with brandId " + brandId);
     }
 }
