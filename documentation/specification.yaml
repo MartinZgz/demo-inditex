@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Price Service API
+  description: API to query applicable prices for products in a chain based on date, product, and brand.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /prices:
+    get:
+      summary: Query the applicable price for a product
+      description: Returns the price, rate, and application dates for a product in a chain based on the specified date.
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          description: Start date in format yyyy-MM-dd-HH:mm:ss.
+          schema:
+            type: string
+            format: date-time
+          examples:
+            startDate:
+              summary: Query for June 14, 2020 at 10:00 AM
+              value: "2020-06-14-10:00:00"
+        - name: productId
+          in: query
+          required: true
+          description: Product identifier.
+          schema:
+            type: integer
+          examples:
+            productId:
+              summary: Product ID 35455
+              value: 35455
+        - name: brandId
+          in: query
+          required: true
+          description: Brand identifier.
+          schema:
+            type: integer
+          examples:
+            brandId:
+              summary: Brand ID 1 (ZARA).
+              value: 1
+      responses:
+        '200':
+          description: Query successfully executed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+              examples:
+                priceResponse:
+                  summary: Example response for June 14, 2020 at 10:00 AM
+                  value:
+                    productId: 35455
+                    brandId: 1
+                    priceList: 1
+                    startDate: "2020-06-14-00:00:00"
+                    endDate: "2020-12-31-23:59:59"
+                    price: 35.50
+                    currency: "EUR"
+        '400':
+          description: Error in input parameters.
+        '404':
+          description: No applicable price found for the specified criteria.
+
+
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          description: Product identifier.
+        brandId:
+          type: integer
+          description: Brand identifier.
+        priceList:
+          type: integer
+          description: Applicable price rate identifier.
+        startDate:
+          type: string
+          format: date-time
+          description: Start date of the price in format yyyy-MM-dd-HH:mm:ss.
+        endDate:
+          type: string
+          format: date-time
+          description: End date of the price in format yyyy-MM-dd-HH:mm:ss.
+        price:
+          type: number
+          format: float
+          description: Final applicable price.
+        currency:
+          type: string
+          description: Price currency.
