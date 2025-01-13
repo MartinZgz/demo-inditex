@@ -1,7 +1,9 @@
 package com.inditex.demo.application.domain.service;
 
 import com.inditex.demo.adapter.out.persistance.PricePersistanceAdapter;
+import com.inditex.demo.application.domain.exceptions.BrandNotFoundException;
 import com.inditex.demo.application.domain.exceptions.PriceNotFoundException;
+import com.inditex.demo.application.domain.model.Brand;
 import com.inditex.demo.application.domain.model.Price;
 import com.inditex.demo.application.port.in.GetPriceMapper;
 import com.inditex.demo.application.port.in.GetPriceRequest;
@@ -27,8 +29,8 @@ public class GetPriceService implements GetPriceUseCase {
     }
 
     @Override
-    public GetPriceResponse getPrice(GetPriceRequest request) throws PriceNotFoundException {
-        logger.info("Retrieving Prices for the following product Id {}", request.productId());
+    public GetPriceResponse getPrice(GetPriceRequest request) throws PriceNotFoundException, BrandNotFoundException {
+        logger.info("Retrieving Prices for the productId {}, BrandId {} and startDate {}", request.productId(), Brand.fromBrandId(request.brandId()), request.startDate());
         List<Price> prices = pricePersistanceAdapter.fetchPricesByStartDateAndProductIdAndBrandId(request.startDate(), request.productId(), request.brandId());
         if (prices.isEmpty()) {
             throw new PriceNotFoundException("No prices found for the product, the specific date and the brand ID");

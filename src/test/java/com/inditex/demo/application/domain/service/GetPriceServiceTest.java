@@ -1,6 +1,7 @@
 package com.inditex.demo.application.domain.service;
 
 import com.inditex.demo.adapter.out.persistance.PricePersistanceAdapter;
+import com.inditex.demo.application.domain.exceptions.BrandNotFoundException;
 import com.inditex.demo.application.domain.exceptions.PriceNotFoundException;
 import com.inditex.demo.application.domain.model.Brand;
 import com.inditex.demo.application.domain.model.Price;
@@ -33,7 +34,7 @@ public class GetPriceServiceTest {
     }
 
     @Test
-    public void givenValidRequest_whenPricesExist_thenReturnsGetPriceResponse() throws PriceNotFoundException {
+    public void givenValidRequest_whenPricesExist_thenReturnsGetPriceResponse() throws PriceNotFoundException, BrandNotFoundException {
         GetPriceRequest request = new GetPriceRequest("2020-06-14-10.00.00", 35455, 1);
 
         Price price = new Price(

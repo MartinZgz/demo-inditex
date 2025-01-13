@@ -1,5 +1,6 @@
 package com.inditex.demo.adapter.out.persistance;
 
+import com.inditex.demo.application.domain.exceptions.BrandNotFoundException;
 import com.inditex.demo.application.domain.model.Brand;
 import com.inditex.demo.application.domain.model.Price;
 import org.mapstruct.Mapper;
@@ -22,7 +23,7 @@ public interface PriceMapper {
     Price mapToDomainEntity(PriceJPAEntity priceJPAEntity);
 
     @Named("mapFromBrandIdToBrand")
-    public static Brand mapFromBrandIdToBrand(int brandId) {
+    public static Brand mapFromBrandIdToBrand(int brandId) throws BrandNotFoundException {
         return Brand.fromBrandId(brandId);
     }
 }

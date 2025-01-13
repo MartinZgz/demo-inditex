@@ -1,5 +1,6 @@
 package com.inditex.demo.adapter.in.web;
 
+import com.inditex.demo.application.domain.exceptions.BrandNotFoundException;
 import com.inditex.demo.application.domain.exceptions.PriceNotFoundException;
 import com.inditex.demo.application.port.in.GetPriceRequest;
 import com.inditex.demo.application.port.in.GetPriceResponse;
@@ -32,7 +33,7 @@ public class PriceController {
             @RequestParam(value = "startDate") String startDate,
             @RequestParam(value = "productId") int productId,
             @RequestParam(value = "brandId") int brandId
-) throws PriceNotFoundException {
+) throws PriceNotFoundException, BrandNotFoundException {
         return new ResponseEntity<>(getPriceUseCase.getPrice(new GetPriceRequest(startDate, productId, brandId)), HttpStatus.OK);
     }
 
