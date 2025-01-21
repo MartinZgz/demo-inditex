@@ -20,5 +20,5 @@ public interface PriceRepository extends JpaRepository<PriceJPAEntity, PriceId> 
            AND PARSEDATETIME(REPLACE(REPLACE(END_DATE, '-', ' '), '.', ':'), 'yyyy MM dd HH:mm:ss') >= :startDate
            ORDER BY PRIORITY DESC
            """, nativeQuery = true)
-    Optional<List<PriceJPAEntity>> findPricesByCriteria(LocalDateTime startDate, long productId, int brandId);
+    List<PriceJPAEntity> findPricesByCriteria(LocalDateTime startDate, long productId, int brandId);
 }
